@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <a class="btn btn-warning" href="/">
+        <ion-icon name="arrow-undo-outline"></ion-icon>
+        Back</a>
+
+    <div class="col-md-8 offset-2">
+        <form method="POST" id="contactForm" name="contactForm" class="contactForm">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="form-group">
+                        <label for="inputEmail4" class="form-label">Status</label>
+                        {{ form.status }}
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="form-group">
+                        <label for="inputEmail4" class="form-label">Priority</label>
+                        {{ form.priority }}
+                    </div>
+                </div>
+                <div class="col-md-12 mb-3">
+                    <div class="form-group">
+                        <label for="inputEmail4" class="form-label">Title</label>
+                        {{ form.title }}
+                    </div>
+                </div>
+                <div class="col-md-12 mb-3">
+                    <div class="form-group">
+                        <label for="inputEmail4" class="form-label">Content</label>
+                        {{ form.content }}
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="form-group">
+                        <label for="inputEmail4" class="form-label">Deadliine</label>
+                        {{ form.deadline }}
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <input type="submit" value="Send Message" class="btn btn-primary">
+                        <div class="submitting"></div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+{% endblock %}

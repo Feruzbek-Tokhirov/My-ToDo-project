@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/"><h4 class="card-title">MyToDo</h4></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                </li>
+                <li class="nav-link active" aria-current="page"><a href="/created/">
+                    <h6 class="card-title">Add new task
+                        <ion-icon name="add-outline"></ion-icon>
+                    </h6>
+                </a></li>
+            </ul>
+            <div class="card">
+                <a class="nav-link" aria-current="page" href="#">
+                    <ion-icon name="person"></ion-icon>
+                    {{ request.user.username }}</a>
+            </div>
+        </div>
+        <div class="card">
+            {% if request.user.is_authenticated %}
+            <li class="nav-link active" aria-current="page"><a href="/logout/">LogOut
+                <ion-icon name="arrow-redo-outline"></ion-icon>
+            </a></li>
+            {% else %}
+            <li class="nav-link active" aria-current="page"><a href="/login/">LogIn
+                <ion-icon name="arrow-redo-outline"></ion-icon>
+            </a></li>
+            {% endif %}
+        </div>
+    </div>
+    </div>
+</nav>
+

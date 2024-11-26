@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="col-md-6 offset-6">
+        <form class="d-flex" action="{% url 'index' %}">
+            {% csrf_token %}
+            <input class="form-control me-3" type="search" placeholder="Search" aria-label="Search" name="q" autocomplete="off">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </div><br>
+    <div class="container btn-group" role="group" aria-label="Basic mixed styles example">
+        <a type="button" class="btn btn-danger" href="/">All</a>
+        <a type="button" class="btn btn-primary" href="/?status=0">New</a>
+        <a type="button" class="btn btn-info" href="/?status=1">Process</a>
+        <a type="button" class="btn btn-success" href="/?status=2">Completed</a>
+        <a type="button" class="btn btn-warning" href="/?status=3">Cancelled</a>
+        <a class="btn dropdown-toggle btn-secondary" href="#" data-bs-toggle="dropdown"
+           aria-expanded="false">
+            Dropdown
+        </a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="?priorty=0">Lowest</a></li>
+            <li><a class="dropdown-item" href="?priorty=1">Low</a></li>
+            <li><a class="dropdown-item" href="?priorty=2">Medium</a></li>
+            <li><a class="dropdown-item" href="?priorty=3">High</a></li>
+            <li><a class="dropdown-item" href="?priorty=4">Highest</a></li>
+        </ul>
+    </div>
+    <div class="todo-card mt-4">
+        {% for todo in todos %}
+            <div class="card border-primary mb-3 ">
+                <div class="card-header">
+                    {{ todo.get_status_display }}
+                </div>
+                <div class="card-body">
+                    {% if todo.priority == 0 %}
+                        <h5 class="card-title">{{ todo.title }}
+                            <ion-icon name="chevron-down-circle"></ion-icon>
+                        </h5>
+                    {% elif todo.priority == 1 %}
+                        <h5 class="card-title">{{ todo.title }}
+                            <ion-icon name="caret-down"></ion-icon>
+                        </h5>
+                    {% elif todo.priority == 2 %}
+                        <h5 class="card-title">{{ todo.title }}
+                            <ion-icon name="chevron-up-circle"></ion-icon>
+                        </h5>
+                    {% elif todo.priority == 3 %}
+                        <h5 class="card-title">{{ todo.title }}
+                            <ion-icon name="caret-up"></ion-icon>
+                        </h5>
+                    {% elif todo.priority == 4 %}
+                        <h5 class="card-title">{{ todo.title }}
+                            <ion-icon name="reorder-two"></ion-icon>
+                        </h5>
+                    {% endif %}
+                    <p class="card-text">Deadline: {{ todo.deadline }}</p>
+                    <a href="/edit/{{ todo.id }}/" class="btn btn-success">
+                        <ion-icon name="pencil-outline"></ion-icon>
+                        Edit</a>
+                    <a href="/delete/{{ todo.id }}/" class="btn btn-danger">Delete</a>
+                </div>
+                <div class="card-footer text-muted d-flex">
+                    <ul class=" card text-end">
+                        <li>Update at: {{ todo.updated_at }}</li>
+                        <li>Created at: {{ todo.created_at }}</li>
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
